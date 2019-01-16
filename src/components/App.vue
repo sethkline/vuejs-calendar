@@ -1,5 +1,13 @@
 <template>
     <div>
+        <div id="header">
+            <div>
+                <h1>Seth Calendar</h1>
+            </div>
+            <div>
+                <current-month></current-month>
+            </div>
+        </div>
         <div id="day-bar">
             <div>Mon</div>
             <div>Tue</div>
@@ -14,18 +22,21 @@
                 <calendar-day v-for="day in week" :day="day"></calendar-day>
             </div>
         </div>
+        <!-- <event-form></event-form> -->
     </div>
 </template>
 <script>
     import CalendarDay from './CalendarDay.vue';
+    import CurrentMonth from './CurrentMonth.vue';
+    // import EventForm from './EventForm.vue';
     export default {
-        data() {
-            return {
-                month: 2,
-                year: 2017
-            };
-        },
         computed: {
+            month() {
+                return this.$store.state.currentMonth;
+            },
+            year() {
+                return this.$store.state.currentYear;
+            },
             days() {
                 // Generating all days in current month
                 let days = [];
@@ -68,7 +79,9 @@
             }
         },
         components: {
-            CalendarDay
+            CalendarDay,
+            CurrentMonth,
+            // EventForm
         }
     }
 </script>
