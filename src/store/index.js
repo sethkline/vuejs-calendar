@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import moment from 'moment-timezone';
+import Axios from 'axios';
 
 
 Vue.use(Vuex);
@@ -36,10 +37,12 @@ export default new Vuex.Store({
                 state.eventFormActive = payload;
             },
             addEvent(state, payload) {
-                state.events.push({
+               let obj = {
                     description: payload,
                     date: state.eventFormDate
-                })
+                };
+                state.events.push(obj)
+                Axios.post('/add_event', obj)
             },
             eventFormDate(state, payload) {
                 state.eventFormDate = payload;
